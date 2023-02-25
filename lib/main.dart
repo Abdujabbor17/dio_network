@@ -1,4 +1,5 @@
 import 'package:dio_network/screen/Home/home_view.dart';
+import 'package:dio_network/screen/photos/photos_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const HomePage(),
+      home: const PhotosPage(),
     );
   }
 }

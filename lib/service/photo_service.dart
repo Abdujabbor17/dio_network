@@ -1,31 +1,36 @@
 import 'package:dio/dio.dart';
 import 'package:dio_network/core/api/api.dart';
+import 'package:dio_network/model/photo_model.dart';
+import 'package:dio_network/model/photo_model.dart';
+import 'package:dio_network/model/photo_model.dart';
+import 'package:dio_network/model/photo_model.dart';
+import 'package:dio_network/model/photo_model.dart';
 
 import '../core/config/dio_config.dart';
 import '../model/post_model.dart';
 import 'log_service.dart';
 
-class GetPostService {
-  static final GetPostService _inheritance = GetPostService._init();
+class PhotoService {
+  static final PhotoService _inheritance = PhotoService._init();
 
-  static GetPostService get inheritance => _inheritance;
+  static PhotoService get inheritance => _inheritance;
 
-  GetPostService._init();
+  PhotoService._init();
 
-  static Future<List<PostModel>?> getUser() async {
+  static Future<List<PhotoModel>?> getPhotos() async {
     try {
       Response res =
-          await DioConfig.inheritance.createRequest().get(Urls.getPosts);
+          await DioConfig.inheritance.createRequest().get(Urls.getPhotos);
       Log.i(res.data.toString());
       Log.i(res.statusCode.toString());
 
       if (res.statusCode == 200) {
-        List<PostModel> userList = [];
+        List<PhotoModel> photos = [];
         for (var e in (res.data as List)) {
-          userList.add(PostModel.fromJson(e));
+          photos.add(PhotoModel.fromJson(e));
         }
 
-        return userList;
+        return photos;
       } else {
         Log.e("${res.statusMessage} ${res.statusCode}");
       }
@@ -41,14 +46,14 @@ class GetPostService {
     return null;
   }
 
-  static Future<bool> createPost(PostModel newPost) async {
+  /*static Future<bool> createPhoto(PhotoModel newPhoto) async {
     try {
       Response res = await DioConfig.inheritance
           .createRequest()
-          .post(Urls.addPost, data: {
-        "userId": newPost.userId,
-        "title": newPost.title,
-        "body": newPost.body
+          .post(Urls.addPhoto, data: {
+        "userId": newPhoto.userId,
+        "title": newPhoto.title,
+        "body": newPhoto.body
       });
       Log.i(res.data.toString());
       Log.i(res.statusCode.toString());
@@ -72,14 +77,14 @@ class GetPostService {
     }
   }
 
-  static Future<bool> editPost(PostModel newPost) async {
+  static Future<bool> editPhoto(PhotoModel newPhoto) async {
     try {
       Response res = await DioConfig.inheritance
           .createRequest()
-          .put(Urls.updatePost + newPost.id.toString(), data: {
-        "userId": newPost.userId,
-        "title": newPost.title,
-        "body": newPost.body
+          .put(Urls.updatePhoto + newPhoto.id.toString(), data: {
+        "userId": newPhoto.userId,
+        "title": newPhoto.title,
+        "body": newPhoto.body
       });
       Log.i(res.data.toString());
       Log.i(res.statusCode.toString());
@@ -103,11 +108,11 @@ class GetPostService {
     }
   }
 
-  static Future<bool> deletePost(int id) async {
+  static Future<bool> deletePhoto(int id) async {
     try {
       Response res = await DioConfig.inheritance
           .createRequest()
-          .delete(Urls.deletePost + id.toString());
+          .delete(Urls.deletePhoto + id.toString());
       Log.i(res.data.toString());
       Log.i(res.statusCode.toString());
 
@@ -128,5 +133,5 @@ class GetPostService {
       Log.e(e.toString());
       return false;
     }
-  }
+  }*/
 }
